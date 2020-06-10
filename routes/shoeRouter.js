@@ -21,7 +21,7 @@ shoeRouter.route('/')
 .post((req,res,next) =>{
     return Shoes.create(req.body)
      .then((shoe)=>{
-       console.log('Shoe creted:',shoe);
+       console.log('Shoe created:',shoe);
         res.setHeader('Content-Type','application/json');
         res.json(shoe);
      },(err)=>next(err))
