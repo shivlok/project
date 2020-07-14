@@ -41,18 +41,5 @@
       "featured": false
     }
   ],
-  "registerUser": [
-    {
-      "firstname": "shivlok",
-      "lastname": "Sharma",
-      "DOB": "1999-04-11",
-      "gender": "Male",
-      "email": "shivlok8719998585@gmail.com",
-      "telnum": "7626818423",
-      "username": "shivlok",
-      "password": "123456",
-      "newUser": true,
-      "id": 1
-    }
-  ]
+  "registerUser": []
 }
