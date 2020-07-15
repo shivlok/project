@@ -1,0 +1,29 @@
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+     
+     <div fxFlex>
+       <div>
+         <h3>Explore</h3>
+         <hr>
+       </div>
+     </div>
+   <div fxFlex *ngIf="shoes" [@expand]>
+    <mat-grid-list cols="2" rowHeight="200px">
+      <mat-grid-tile *ngFor="let shoe of shoes" [routerLink]="['/shoedetail',shoe.id]" appHighlight>
+        <img width="300px" height="200px" src="{{BaseURL+shoe.image}}" alt={{shoe.name}}>
+        <mat-grid-tile-footer class="background-primary">
+            <a mat-button class="text-floral-white"><span class="fa fa-thumbs-up fa-lg"></span>Like</a>
+            <a mat-button class="text-floral-white"><span class="fa fa-share fa-lg"></span>Share</a>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+   </div>
+   <div fxFlex [hidden]="shoes || errMess">
+     <mat-spinner></mat-spinner> <h4>Loading...Please Wait!</h4>
+   </div>
+   <div *ngIf="errMess">
+    <h2>ERROR</h2>
+    <h4>{{errMess}}</h4>
+</div>
+</div>
