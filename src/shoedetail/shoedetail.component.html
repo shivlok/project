@@ -1,0 +1,37 @@
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+  
+  <div fxFlex *ngIf="shoe" [@visibility]="visibility"  [@expand]>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+     <h4 matLine>{{shoe.label}}</h4>
+     <h5>Color:{{shoe.color}}</h5>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img width="450px" height="500px" src="{{BaseURL +shoe.image}}">
+    <p>{{shoe.description | uppercase}} {{shoe.discount}} off</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button [routerLink]="['/shoedetail',prev]"><span class="fa fa-chevron-left fa-lg"></span></a>
+    <a mat-button  (click)="addToCart(shoe)"><span class="fa fa-plus fa-lg"></span> Add to Cart</a>
+    <a mat-button [routerLink]="['/shoedetail',next]"><span class="fa fa-chevron-right fa-lg"></span></a>
+  </mat-card-actions>
+</mat-card>
+</div>
+<div fxFlex [hidden]="shoe || errMess">
+  <mat-spinner></mat-spinner> <h4>Loading...Please Wait!</h4>
+</div>
+<div *ngIf="errMess">
+  <h2>ERROR</h2>
+  <h4>{{errMess}}</h4>
+</div>
+
+</div>

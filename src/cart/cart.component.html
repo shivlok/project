@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    Your cart
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+  </mat-toolbar>
+  <mat-dialog-content>
+  
+      <div *ngFor="let item of items">
+       <p> <img width="200px" height="200px" src="{{BaseURL + item.image}}"></p>
+        <p>Price :{{item.price | currency}}</p>
+      </div>
+      <div *ngIf="items.length==0">
+        <p><b>Your cart is empty!</b></p>
+      </div>
+   </mat-dialog-content>
+    <mat-dialog-actions *ngIf="items.length > 0">
+        <span class="flex-spacer"></span>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button class="background-secondary text-floral-white">Buy</button>
+     </mat-dialog-actions>
+    
+    
+    
+  
+  
+  

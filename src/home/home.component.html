@@ -1,0 +1,48 @@
+
+<div class="container"
+fxLayout="row"
+fxLayout.sm="column"
+fxLayout.xs="column"
+fxLayoutAlign.gt-md="space-around center"
+fxLayoutGap="10px">
+
+
+<mat-card *ngFor="let shoe of fshoe" [@expand]>
+  <mat-card-header>
+    <mat-card-title>
+     <h4 matLine>{{shoe.label}}</h4>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img width="450px" height="500px" src="{{BaseURL + shoe.image}}">
+    <p>{{shoe.description | uppercase}}</p>
+  </mat-card-content>
+  <a mat-button><span class="fa fa-thumbs-up fa-lg"></span>Like</a>
+  <a mat-button><span class="fa fa-share fa-lg"></span>Share</a>
+</mat-card>
+<div fxFlex [hidden]="fshoe || errMess">
+    <mat-spinner></mat-spinner>  <h4>Loading...Please Wait!</h4>
+</div>
+<div fxFlex *ngIf="errMess">
+    <h2>ERROR</h2>
+    <h4>{{errMess}}</h4>
+</div>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-toolbar color="primary">
+       <h4> Register Yourself</h4>
+        </mat-toolbar>
+      </mat-card-title>
+    </mat-card-header>
+     <mat-card-content>
+      <app-registration></app-registration>
+      </mat-card-content>
+  </mat-card>
+  <div *ngIf="InfoMess">{{InfoMess}}</div>
+</div>
+
+
+
+  
+  

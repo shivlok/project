@@ -1,0 +1,73 @@
+
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="registrationForm" #regForm="ngForm" >
+    
+    <p>
+  <mat-form-field>
+      <input matInput formControlName="firstname" type="text" placeholder="First Name" name="firstname" required>
+      <mat-error *ngIf="registrationForm.get('firstname').hasError('required') && registrationForm.get('firstname').touched">
+          First name is required
+      </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="lastname" type="text" placeholder="Last Name" name="lastname" required>
+    <mat-error *ngIf="registrationForm.get('lastname').hasError('required') && registrationForm.get('lastname').touched">
+        Last name is required
+    </mat-error>
+</mat-form-field>
+</p>
+<p>
+    <mat-form-field>
+        <input matInput formControlName="DOB" type="date" placeholder="date of birth" name="DOB" required>
+        <mat-error *ngIf="registrationForm.get('DOB').hasError('required') && registrationForm.get('DOB').touched">
+            Date of birth is required
+        </mat-error>
+    </mat-form-field>
+     <mat-form-field>   
+    <mat-select formControlName="gender" placeholder="Gender" required>
+        <mat-option *ngFor="let gen of gender" [value]="gen">
+            {{ gen }}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngIf="registrationForm.get('gender').hasError('required') && registrationForm.get('gender').touched">
+        Gender is required
+    </mat-error>
+    </mat-form-field>
+</p>
+<p>
+<mat-form-field>
+    <input matInput formControlName="email" type="email" placeholder="Email" name="email" required>
+    <mat-error *ngIf="registrationForm.get('email').hasError('required') && registrationForm.get('email').touched">
+        Email is required
+    </mat-error>
+</mat-form-field>
+<mat-form-field>
+    <input matInput formControlName="telnum" type="text" placeholder="Tel.No" name="telnum" required>
+    <mat-error *ngIf="registrationForm.get('telnum').hasError('required') && registrationForm.get('telnum').touched">
+        Tel.No is required
+    </mat-error>
+</mat-form-field>
+</p>
+<p>
+<mat-form-field>
+    <input matInput formControlName="username" type="text" placeholder="Username" name="username" required>
+    <mat-error *ngIf="registrationForm.get('username').hasError('required') && registrationForm.get('username').touched">
+        Username is required
+    </mat-error>
+</mat-form-field>
+<mat-form-field>
+    <input matInput formControlName="password" type="password" placeholder="Password" name="password" required>
+    <mat-error *ngIf="registrationForm.get('password').hasError('required') && registrationForm.get('password').touched">
+        First name is required
+    </mat-error>
+</mat-form-field>
+</p>
+
+<mat-checkbox formControlName="newUser">Are you a new user?</mat-checkbox>
+<p>
+ <button mat-button type="submit" [disabled]="registrationForm.invalid">Register</button>
+ <button mat-button type="reset" >Reset</button>
+</p>
+</form>
+
+
+
