@@ -3,14 +3,17 @@ const bodyParser = require('body-parser');
 const shoeRouter = express.Router();
 const mongoose=require('mongoose');
 const Shoes=require('../models/shoes');
+var authenticate=require('../authenticate');
+const  cors  = require('./cors');
 
 
 shoeRouter.use(bodyParser.json());
 
 shoeRouter.route('/')
-.get((req,res,next) =>{
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.cors,(req,res,next) =>{
    
-    return Shoes.find({})
+    return Shoes.find(req.query)
      .then((shoes) =>{
          res.statusCode=200;
          res.setHeader('Content-Type','application/json');
@@ -18,7 +21,7 @@ shoeRouter.route('/')
      },(err)=>next(err))
      .catch((err)=>next(err));
 })
-.post((req,res,next) =>{
+.post(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     return Shoes.create(req.body)
      .then((shoe)=>{
        console.log('Shoe created:',shoe);
@@ -27,11 +30,11 @@ shoeRouter.route('/')
      },(err)=>next(err))
       .catch(err=>next(err));  
 })
-.put((req,res,next) =>{
+.put(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     res.statusCode=403;
     res.end('put operation is forbidden!')
 })
-.delete((req,res,next) =>{
+.delete(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     return Shoes.remove({})
      .then((resp)=>{
         res.statusCode=200;
@@ -42,7 +45,8 @@ shoeRouter.route('/')
 });
 
 shoeRouter.route('/:shoeId')
-.get((req,res,next) =>{
+.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
+.get(cors.cors,(req,res,next) =>{
     Shoes.findById(req.params.shoeId)
      .then((shoe) =>{
          res.statusCode=200;
@@ -51,11 +55,11 @@ shoeRouter.route('/:shoeId')
      },(err)=>next(err))
       .catch((err)=>next(err));
 })
-.post((req,res,next) =>{
+.post(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     res.statusCode=403;
     res.end('POST operation is forbidden!');
  })
-.put((req,res,next) =>{
+.put(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     Shoes.findByIdAndUpdate(req.params.shoeId,{ $set : req.body},{ new : true })
      .then((shoe) =>{
         res.statusCode=200;
@@ -64,7 +68,7 @@ shoeRouter.route('/:shoeId')
      },(err)=>next(err))
       .catch((err)=>next(err));
 })
-.delete((req,res,next) =>{
+.delete(cors.corsWithOptions,authenticate.verifyUser,(req,res,next) =>{
     Shoes.findByIdAndRemove(req.params.shoeId)
      .then((resp) => {
         res.statusCode=200;
